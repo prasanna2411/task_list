@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+        .task-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #taskInput {
+            width: calc(100% - 120px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        #addTaskBtn {
+            width: 100px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        #addTaskBtn:hover {
+            background-color: #45a049;
+        }
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0 0;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+        .task-item:hover {
+            background-color: #f1f1f1;
+        }
+        .task-item span {
+            flex: 1;
+            font-size: 16px;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-container">
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <button id="addTaskBtn">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        document.getElementById('addTaskBtn').addEventListener('click', function() {
+            var taskInput = document.getElementById('taskInput');
+            var taskValue = taskInput.value.trim();
+            
+            if (taskValue !== '') {
+                var taskList = document.getElementById('taskList');
+
+                // Create task item
+                var taskItem = document.createElement('li');
+                taskItem.className = 'task-item';
+                
+                var taskText = document.createElement('span');
+                taskText.textContent = taskValue;
+                
+                var deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.onclick = function() {
+                    taskList.removeChild(taskItem);
+                };
+                
+                taskItem.appendChild(taskText);
+                taskItem.appendChild(deleteBtn);
+                taskList.appendChild(taskItem);
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        });
+    </script>
+</body>
+</html>
